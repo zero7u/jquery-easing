@@ -19,6 +19,20 @@ jQuery.extend( jQuery.easing,
 		//alert(jQuery.easing.default);
 		return jQuery.easing[jQuery.easing.def](x, t, b, c, d);
 	},
+	// 兼容之前的版本
+	backin: function(x, t, b, c, d) {
+		var s = 1.70158;
+		return c * (t /= d) * t * ((s + 1) * t - s) + b
+	},
+	backout: function(x, t, b, c, d) {
+		var s = 1.70158;
+		return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b
+	},
+	backinout: function(x, t, b, c, d) {
+		var s = 1.70158;
+		if ((t /= d / 2) < 1) return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
+		return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b
+	},
 	easeInQuad: function (x, t, b, c, d) {
 		return c*(t/=d)*t + b;
 	},
